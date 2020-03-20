@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  git:
+    container_name: git
+    image: lastshogun13/docker_git:latest
+    volumes:
+      - $HOME/git:/git:delegated
+      - $HOME/.netrc:/root/.netrc:ro

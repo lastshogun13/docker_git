@@ -2,7 +2,7 @@
 
 How to use
 
-### host os (Windows only)
+### prepare for host os (Windows only)
 ```
 echo 'machine github.com
 login ******
@@ -10,13 +10,38 @@ password ******
 ' > ~/.netrc
 ```
 
-login: github account name
+| key       | value                |
+| --------- | -------------------- |
+| login     | github account name  |
+| password  | github password      |
 
-password: github password
+### prepare docker-compose
 
-### How to launch
+```
+mkdir ~/git
+cd ~/git
+curl --output docker-compose.yml https://raw.githubusercontent.com/lastshogun13/docker_git/master/docker-compose2.yml
+```
+
+### How to use (recommend)
+```
+cd ~/git
+docker-compose run git "YourName" "YourEmail"
+```
+
+### Docker-compose build and run
 ```
 cd ~/git/docker_git
 docker-compose build
 docker-compose run git "YourName" "YourEmail"
+```
+
+### Build command (Developer's memo)
+```
+cd ~/git/docker_git/docker/git
+docker build . -t lastshogun13/docker_git:0.0.1
+docker build . -t lastshogun13/docker_git:latest
+docker login
+docker push lastshogun13/docker_git:0.0.1
+docker push lastshogun13/docker_git:latest
 ```
