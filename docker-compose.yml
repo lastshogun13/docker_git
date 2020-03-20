@@ -5,5 +5,5 @@ services:
     container_name: git
     build: ./docker/git
     volumes:
-      - ~/git:/git:delegated
+      - $HOME/git:/git:delegated
       - $HOME/.netrc:/root/.netrc:ro
