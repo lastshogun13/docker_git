@@ -3,10 +3,6 @@
 git config --global user.name "$1"
 git config --global user.email "$2"
 
-# for file in `\find /git -maxdepth 1 -type d`; do
-#     echo $file;
-# done
-
 files="/git/*"
 for filepath in $files; do
   if [ -d $filepath ]; then
@@ -14,8 +10,8 @@ for filepath in $files; do
     cd $filepath
     git secrets --install > /dev/null 2>&1
 
-    if [ -f "${filepath}/script/git_screts_allowed.sh" ]; then
-      /bin/bash "${filepath}/script/git_screts_allowed.sh"
+    if [ -f "${filepath}/script/git_scerets_allowed.sh" ]; then
+      /bin/bash "${filepath}/script/git_secrets_allowed.sh"
     fi
 
     cd ..

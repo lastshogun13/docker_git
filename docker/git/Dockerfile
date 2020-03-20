@@ -53,7 +53,7 @@ RUN rm -rf /usr/local/src/git-secret
 
 # bashrc
 RUN echo 'export PS1="[\u@"$(hostname -i)" \w]$ "' >> ~/.bashrc
-RUN echo 'export PS1="[docer_git \w]$ "' >> ~/.bashrc
+RUN echo 'export PS1="[docker_git \w]$ "' >> ~/.bashrc
 RUN echo 'alias ll="ls -al"' >> ~/.bashrc
 RUN echo 'alias vi="vim"' >> ~/.bashrc
 ENV EDITOR=vim
