@@ -5,12 +5,13 @@ git config --global user.email "$2"
 
 files="/git/*"
 for filepath in $files; do
-  if [ -d $filepath ]; then
-    # 存在する場合
+  if [ -d $filepath ] && [ -d "${filepath}/.git" ] ; then
+    # echo $filepath
     cd $filepath
     git secrets --install > /dev/null 2>&1
+    #git flow init -d -f > /dev/null 2>&1
 
-    if [ -f "${filepath}/script/git_scerets_allowed.sh" ]; then
+    if [ -f "${filepath}/script/git_secrets_allowed.sh" ]; then
       /bin/bash "${filepath}/script/git_secrets_allowed.sh"
     fi
 
