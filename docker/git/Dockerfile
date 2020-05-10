@@ -1,4 +1,4 @@
-﻿FROM amazonlinux:2018.03
+﻿FROM amazonlinux:2.0.20200406.0
 
 RUN yum -y update \
  && rm -rf /var/cache/yum/* \
@@ -12,11 +12,17 @@ ENV LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8
 
-RUN yum -y install git zip unzip vim less file wget \
+RUN yum -y install git zip unzip tar gzip vim less file wget procps \
  && rm -rf /var/cache/yum/* \
  && yum clean all
 
-RUN yum -y install make gcc automake ncurses-devel \
+RUN yum -y install make gcc automake ncurses-devel cronie \
+ && rm -rf /var/cache/yum/* \
+ && yum clean all
+
+
+# ruby
+RUN yum -y install ruby \
  && rm -rf /var/cache/yum/* \
  && yum clean all
 

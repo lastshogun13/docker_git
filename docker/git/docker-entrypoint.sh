@@ -5,8 +5,8 @@ git config --global user.email "$2"
 
 files="/git/*"
 for filepath in $files; do
-  if [ -d $filepath ] && [ -d "${filepath}/.git" ] ; then
-    # echo $filepath
+  if [ -d $filepath ] && [ -d "${filepath}/.git" ] && [ ! -f "${filepath}/.docker_git_ignore" ] ; then
+#    echo $filepath
     cd $filepath
     git secrets --install > /dev/null 2>&1
     #git flow init -d -f > /dev/null 2>&1
