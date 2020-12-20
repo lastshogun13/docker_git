@@ -1,4 +1,4 @@
-﻿FROM amazonlinux:2.0.20200406.0
+﻿FROM amazonlinux:2.0.20201111.0
 
 RUN yum -y update \
  && rm -rf /var/cache/yum/* \
@@ -27,6 +27,12 @@ RUN yum -y install ruby \
  && yum clean all
 
 
+# other
+RUN yum -y install rsync bind-utils \
+ && rm -rf /var/cache/yum/* \
+ && yum clean all
+
+
 # git-flow
 WORKDIR /usr/local/src/gitflow
 RUN wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/develop/contrib/gitflow-installer.sh | bash \
@@ -35,9 +41,9 @@ RUN wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/deve
 
 # tig
 WORKDIR /usr/local/src/tig
-RUN wget https://github.com/jonas/tig/releases/download/tig-2.5.0/tig-2.5.0.tar.gz \
- && tar xzf tig-2.5.0.tar.gz \
- && cd tig-2.5.0 \
+RUN wget https://github.com/jonas/tig/releases/download/tig-2.5.1/tig-2.5.1.tar.gz \
+ && tar xzf tig-2.5.1.tar.gz \
+ && cd tig-2.5.1 \
  && ./autogen.sh \
  && ./configure --without-ncurses \
  && make prefix=/usr/local \
