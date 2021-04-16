@@ -1,4 +1,4 @@
-﻿FROM amazonlinux:2.0.20210126.0
+﻿FROM amazonlinux:2.0.20210326.0
 
 RUN yum -y update \
  && rm -rf /var/cache/yum/* \
@@ -78,8 +78,7 @@ RUN wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git
 # bashrc
 # RUN echo 'export PS1="[\u@"$(hostname -i)" \w]$ "' >> ~/.bashrc
 # RUN echo 'export PS1="[docker_git \w]$ "' >> ~/.bashrc
-RUN echo 'export PS1="\[\033[1;34m\]docker_git \[\033[0;33m\]\w\[\033[36m\]\$(__git_ps1) \[\033[0;00m\]\\]\n$ "' >> ~/.bashrc
-
+RUN echo 'export PS1="\[\033[1;36m\]docker_git \[\033[1;32m\]\w\[\033[1;35m\]\$(__git_ps1) \[\033[00m\]\n$ "' >> ~/.bashrc
 
 RUN echo 'alias ll="ls -al"' >> ~/.bashrc
 RUN echo 'alias vi="vim"' >> ~/.bashrc
@@ -89,6 +88,7 @@ ENV EDITOR=vim
 # git
 
 RUN git secrets --register-aws --global
+RUN git config --global core.autocrlf input
 
 
 # finalize

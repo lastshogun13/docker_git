@@ -1,0 +1,12 @@
+Launch PowerShell
+
+```
+cd ~/git/docker_git
+docker-compose build
+docker-compose run git "Keisuke Minami" "lastshogun13@gmail.com"
+```
+
+```
+cd ~/git
+docker-compose run git "Keisuke Minami" "lastshogun13@gmail.com"
+```
