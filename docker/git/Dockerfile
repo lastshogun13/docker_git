@@ -1,4 +1,4 @@
-﻿FROM amazonlinux:2.0.20210326.0
+﻿FROM amazonlinux:2.0.20210701.0
 
 RUN yum -y update \
  && rm -rf /var/cache/yum/* \
@@ -41,9 +41,9 @@ RUN wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/deve
 
 # tig
 WORKDIR /usr/local/src/tig
-RUN wget https://github.com/jonas/tig/releases/download/tig-2.5.1/tig-2.5.1.tar.gz \
- && tar xzf tig-2.5.1.tar.gz \
- && cd tig-2.5.1 \
+RUN wget https://github.com/jonas/tig/releases/download/tig-2.5.4/tig-2.5.4.tar.gz \
+ && tar xzf tig-2.5.4.tar.gz \
+ && cd tig-2.5.4 \
  && ./autogen.sh \
  && ./configure --without-ncurses \
  && make prefix=/usr/local \

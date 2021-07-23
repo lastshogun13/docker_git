@@ -7,3 +7,4 @@ services:
     volumes:
       - $HOME/git:/git:delegated
       - $HOME/.netrc:/root/.netrc:ro
+      - $HOME/.gitconfig:/root/.gitconfig:rw
