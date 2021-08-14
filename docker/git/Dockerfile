@@ -1,4 +1,4 @@
-﻿FROM amazonlinux:2.0.20210701.0
+﻿FROM amazonlinux:2.0.20210721.2
 
 RUN yum -y update \
  && rm -rf /var/cache/yum/* \
@@ -83,6 +83,7 @@ RUN echo 'export PS1="\[\033[1;36m\]docker_git \[\033[1;32m\]\w\[\033[1;35m\]\$(
 RUN echo 'alias ll="ls -al"' >> ~/.bashrc
 RUN echo 'alias vi="vim"' >> ~/.bashrc
 ENV EDITOR=vim
+ENV TZ='Asia/Bangkok'
 
 
 # git

@@ -19,4 +19,6 @@ for filepath in $files; do
   fi
 done
 
+umask 000
+
 /bin/bash
