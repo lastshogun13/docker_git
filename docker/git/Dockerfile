@@ -1,4 +1,4 @@
-﻿FROM amazonlinux:2.0.20210721.2
+﻿FROM amazonlinux:2.0.20220121.0
 
 RUN yum -y update \
  && rm -rf /var/cache/yum/* \
@@ -21,8 +21,9 @@ RUN yum -y install make gcc automake ncurses-devel cronie \
  && yum clean all
 
 
-# ruby
-RUN yum -y install ruby \
+# ruby 3.0
+RUN amazon-linux-extras install -y ruby3.0 \
+ && yum -y install ruby \
  && rm -rf /var/cache/yum/* \
  && yum clean all
 
@@ -41,9 +42,9 @@ RUN wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/deve
 
 # tig
 WORKDIR /usr/local/src/tig
-RUN wget https://github.com/jonas/tig/releases/download/tig-2.5.4/tig-2.5.4.tar.gz \
- && tar xzf tig-2.5.4.tar.gz \
- && cd tig-2.5.4 \
+RUN wget https://github.com/jonas/tig/releases/download/tig-2.5.5/tig-2.5.5.tar.gz \
+ && tar xzf tig-2.5.5.tar.gz \
+ && cd tig-2.5.5 \
  && ./autogen.sh \
  && ./configure --without-ncurses \
  && make prefix=/usr/local \
