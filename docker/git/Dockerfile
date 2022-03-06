@@ -1,4 +1,4 @@
-﻿FROM amazonlinux:2.0.20220121.0
+﻿FROM amazonlinux:2.0.20220218.1
 
 RUN yum -y update \
  && rm -rf /var/cache/yum/* \
@@ -60,20 +60,18 @@ RUN git clone https://github.com/awslabs/git-secrets.git \
  && rm -rf /usr/local/src/git-secret
 
 
-# git-completion.bash
-WORKDIR /root
-RUN wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -O ~/.git-completion.bash \
- && chmod a+x ~/.git-completion.bash \
- && echo "source ~/.git-completion.bash" >> ~/.bashrc \
- && source ~/.bashrc
-
-
 # git-prompt.sh
 WORKDIR /root
 RUN wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -O ~/.git-prompt.sh \
  && chmod a+x ~/.git-prompt.sh \
- && echo "source ~/.git-prompt.sh" >> ~/.bashrc \
- && source ~/.bashrc
+ && echo "source ~/.git-prompt.sh" >> ~/.bashrc
+
+
+# git-completion.bash
+WORKDIR /root
+RUN wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -O ~/.git-completion.bash \
+ && chmod a+x ~/.git-completion.bash \
+ && echo "source ~/.git-completion.bash" >> ~/.bashrc
 
 
 # bashrc
@@ -88,7 +86,6 @@ ENV TZ='Asia/Bangkok'
 
 
 # git
-
 RUN git secrets --register-aws --global
 RUN git config --global core.autocrlf input
 
