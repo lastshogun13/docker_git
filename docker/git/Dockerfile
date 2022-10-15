@@ -1,4 +1,4 @@
-﻿FROM amazonlinux:2.0.20220218.1
+﻿FROM amazonlinux:2.0.20220912.1
 
 RUN yum -y update \
  && rm -rf /var/cache/yum/* \
@@ -35,9 +35,9 @@ RUN yum -y install rsync bind-utils \
 
 
 # git-flow
-WORKDIR /usr/local/src/gitflow
-RUN wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/develop/contrib/gitflow-installer.sh | bash \
- && rm -rf /usr/local/src/gitflow
+#WORKDIR /usr/local/src/gitflow
+#RUN wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/master/contrib/gitflow-installer.sh | bash \
+# && rm -rf /usr/local/src/gitflow
 
 
 # tig
