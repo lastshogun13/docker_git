@@ -1,4 +1,4 @@
-﻿FROM amazonlinux:2.0.20220912.1
+﻿FROM amazonlinux:2.0.20221103.3
 
 RUN yum -y update \
  && rm -rf /var/cache/yum/* \
