@@ -50,9 +50,9 @@ docker-compose run git "YourName" "YourEmail"
 ### Build command (Developer's memo)
 ```
 cd ~/git/docker_git/docker/git
-docker build . -t lastshogun13/docker_git:0.0.21
+docker build . -t lastshogun13/docker_git:0.0.22
 docker build . -t lastshogun13/docker_git:latest
 docker login
-docker push lastshogun13/docker_git:0.0.21
+docker push lastshogun13/docker_git:0.0.22
 docker push lastshogun13/docker_git:latest
 ```
