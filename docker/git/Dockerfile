@@ -1,4 +1,4 @@
-﻿FROM amazonlinux:2.0.20240529.0
+﻿FROM amazonlinux:2.0.20240816.0
 
 RUN yum -y update \
  && rm -rf /var/cache/yum/* \
@@ -23,7 +23,7 @@ RUN yum -y install make gcc automake ncurses-devel cronie \
 
 # ruby 3.0
 RUN amazon-linux-extras install -y ruby3.0 \
- && yum -y install ruby \
+ && yum -y install ruby ruby-devel \
  && rm -rf /var/cache/yum/* \
  && yum clean all
 
@@ -42,9 +42,9 @@ RUN yum -y install rsync bind-utils \
 
 # tig
 WORKDIR /usr/local/src/tig
-RUN wget https://github.com/jonas/tig/releases/download/tig-2.5.8/tig-2.5.8.tar.gz \
- && tar xzf tig-2.5.8.tar.gz \
- && cd tig-2.5.8 \
+RUN wget https://github.com/jonas/tig/releases/download/tig-2.5.10/tig-2.5.10.tar.gz \
+ && tar xzf tig-2.5.10.tar.gz \
+ && cd tig-2.5.10 \
  && ./autogen.sh \
  && ./configure --without-ncurses \
  && make prefix=/usr/local \
