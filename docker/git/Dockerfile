@@ -1,4 +1,4 @@
-﻿FROM amazonlinux:2.0.20241113.1
+﻿FROM amazonlinux:2.0.20250321.0
 
 RUN yum -y update \
  && rm -rf /var/cache/yum/* \
@@ -42,9 +42,9 @@ RUN yum -y install rsync bind-utils \
 
 # tig
 WORKDIR /usr/local/src/tig
-RUN wget https://github.com/jonas/tig/releases/download/tig-2.5.10/tig-2.5.10.tar.gz \
- && tar xzf tig-2.5.10.tar.gz \
- && cd tig-2.5.10 \
+RUN wget https://github.com/jonas/tig/releases/download/tig-2.5.12/tig-2.5.12.tar.gz \
+ && tar xzf tig-2.5.12.tar.gz \
+ && cd tig-2.5.12 \
  && ./autogen.sh \
  && ./configure --without-ncurses \
  && make prefix=/usr/local \

@@ -34,6 +34,18 @@ Invoke-WebRequest -Uri https://raw.githubusercontent.com/lastshogun13/docker_git
 fix file `docker-compose.yml`.
 `$HOME` -> `/c/Users/cmth`
 
+### prepare .gitconfig
+
+vi ~/.gitconfig
+```
+[alias]
+        co = checkout
+        ci = commit
+[user]
+        email = *******
+        name = *******
+```
+
 ### How to use (recommend)
 ```
 cd ~/git
@@ -50,9 +62,9 @@ docker-compose run git "YourName" "YourEmail"
 ### Build command (Developer's memo)
 ```
 cd ~/git/docker_git/docker/git
-docker build . -t lastshogun13/docker_git:0.0.39
+docker build . -t lastshogun13/docker_git:0.0.43
 docker build . -t lastshogun13/docker_git:latest
 docker login
-docker push lastshogun13/docker_git:0.0.39
+docker push lastshogun13/docker_git:0.0.43
 docker push lastshogun13/docker_git:latest
 ```
