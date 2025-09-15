@@ -1,42 +1,27 @@
-﻿FROM amazonlinux:2.0.20250414.0
+﻿FROM amazonlinux:2023.8.20250818.0
 
-RUN yum -y update \
- && rm -rf /var/cache/yum/* \
- && yum clean all
-
-### set locale
-RUN yum reinstall -y glibc-common \
- && rm -rf /var/cache/yum/* \
- && yum clean all
-ENV LC_ALL=en_US.UTF-8 \
-    LANG=en_US.UTF-8 \
-    LANGUAGE=en_US.UTF-8
-
-RUN yum -y install git zip unzip tar gzip vim less file wget procps \
- && rm -rf /var/cache/yum/* \
- && yum clean all
-
-RUN yum -y install make gcc automake ncurses-devel cronie \
+# basic tool & nodejs & python 3
+RUN yum -y install git zip unzip tar gzip vim less file wget procps glibc-langpack-ja glibc-langpack-en \
+                   make gcc automake ncurses-devel cronie rsync bind-utils \
+                   nodejs22 \
+                   python3 python3-pip python3-setuptools \
  && rm -rf /var/cache/yum/* \
  && yum clean all
 
 
-# ruby 3.0
-RUN amazon-linux-extras install -y ruby3.0 \
- && yum -y install ruby ruby-devel \
- && rm -rf /var/cache/yum/* \
- && yum clean all
+# gh (github cli)
+WORKDIR /usr/local/src/gh
+RUN type -p yum-config-manager >/dev/null || yum -y install yum-utils \
+ && yum-config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo \
+ && yum -y install gh \
+ && rm -rf /usr/local/src/gh
 
 
-# other
-RUN yum -y install rsync bind-utils \
- && rm -rf /var/cache/yum/* \
- && yum clean all
-
-
-# git-flow
-#WORKDIR /usr/local/src/gitflow
-#RUN wget -q -O - --no-check-certificate https://github.com/nvie/gitflow/raw/master/contrib/gitflow-installer.sh | bash \
+# # git-flow
+# #WORKDIR /usr/local/src/gitflow
+# #RUN curl -OL https://raw.github.com/nvie/gitflow/develop/contrib/gitflow-installer.sh \
+# && chmod +x gitflow-installer.sh \
+# && ./gitflow-installer.sh
 # && rm -rf /usr/local/src/gitflow
 
 
@@ -75,10 +60,13 @@ RUN wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git
 
 
 # bashrc
-# RUN echo 'export PS1="[\u@"$(hostname -i)" \w]$ "' >> ~/.bashrc
-# RUN echo 'export PS1="[docker_git \w]$ "' >> ~/.bashrc
 RUN echo 'export PS1="\[\033[1;36m\]docker_git \[\033[1;32m\]\w\[\033[1;35m\]\$(__git_ps1) \[\033[00m\]\n$ "' >> ~/.bashrc
-
+RUN echo 'export LANG=en_US.UTF-8' >> ~/.bashrc
+RUN echo 'export LC_CTYPE=ja_JP.UTF-8' >> ~/.bashrc
+RUN echo 'export LC_MESSAGES=en_US.UTF-8' >> ~/.bashrc
+RUN echo 'export LC_TIME=en_US.UTF-8' >> ~/.bashrc
+RUN echo 'export LC_MONETARY=en_US.UTF-8' >> ~/.bashrc
+RUN echo 'export LC_NUMERIC=en_US.UTF-8' >> ~/.bashrc
 RUN echo 'alias ll="ls -al"' >> ~/.bashrc
 RUN echo 'alias vi="vim"' >> ~/.bashrc
 ENV EDITOR=vim
